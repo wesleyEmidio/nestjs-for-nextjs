@@ -3,7 +3,11 @@
 # 26/03
 
 npm i class-validator class-transformer / npm i @nestjs/config / npm i bcryptjs
-/ npm i @nestjs/jwt
+/ npm i @nestjs/jwt / npm i @nestjs/mapped-types
+
+# PACOTE passport 'Estratefia jwt'
+
+npm i @nestjs/passport passport passport-jwt / npm i -D @types/passport-jwt
 
 # banco
 
