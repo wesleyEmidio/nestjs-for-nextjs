@@ -3,7 +3,8 @@
 # 26/03
 
 npm i class-validator class-transformer / npm i @nestjs/config / npm i bcryptjs
-/ npm i @nestjs/jwt / npm i @nestjs/mapped-types
+/ npm i @nestjs/jwt / npm install class-validator@0.14.0 / npm i
+@nestjs/mapped-types
 
 # PACOTE passport 'Estratefia jwt'
 
