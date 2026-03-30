@@ -2,12 +2,6 @@
 // Ele é usado para organizar a aplicação em módulos.
 import { Module } from '@nestjs/common';
 
-// Importa o controller principal da aplicação.
-import { AppController } from './app.controller';
-
-// Importa o service principal.
-import { AppService } from './app.service';
-
 // Importa módulos da aplicação (separação por responsabilidade).
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
@@ -49,6 +43,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
             // Carrega automaticamente as entidades (models)
             autoLoadEntities: process.env.DB_AUTO_LOAD_ENTITIES === '1',
+
+            //entities: [User, Post],
           };
         }
 
@@ -82,10 +78,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
   ],
 
   // Controllers disponíveis nesse módulo
-  controllers: [AppController],
+  controllers: [],
 
   // Services (providers) disponíveis para injeção de dependência
-  providers: [AppService],
+  providers: [],
 
   // O que esse módulo exporta para outros módulos
   exports: [],
