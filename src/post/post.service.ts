@@ -8,9 +8,9 @@ import { Repository } from 'typeorm';
 import { Post } from './entities/post.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreatePostDto } from './dto/create-post.dto';
-import { User } from 'src/user/entities/user.entity';
-import { createSlugFromText } from 'src/common/utils/create-slug-from-text';
 import { UpdatePostDto } from './dto/update-post.dto';
+import { User } from '../user/entities/user.entity';
+import { createSlugFromText } from '../common/utils/create-slug-from-text';
 
 @Injectable()
 export class PostService {
@@ -38,6 +38,18 @@ export class PostService {
     });
 
     return post;
+  }
+
+  async findAll(postData: Partial<Post>) {
+    const posts = await this.postRepository.find({
+      where: postData,
+      order: {
+        createdAt: 'DESC',
+      },
+      relations: ['author'],
+    });
+
+    return posts;
   }
 
   async findOneOwnedOrFail(postData: Partial<Post>, author: User) {
@@ -113,5 +125,14 @@ export class PostService {
     post.published = dto.published ?? post.published;
 
     return this.postRepository.save(post);
+  }
+
+  async remove(postData: Partial<Post>, author: User) {
+    const post = await this.findOneOrFail(postData);
+    await this.postRepository.delete({
+      ...postData,
+      author: { id: author.id },
+    });
+    return post;
   }
 }

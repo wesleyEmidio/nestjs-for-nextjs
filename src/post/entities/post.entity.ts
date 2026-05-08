@@ -1,4 +1,3 @@
-import { User } from 'src/user/entities/user.entity';
 import {
   Column,
   CreateDateColumn,
@@ -7,37 +6,38 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { User } from '../../user/entities/user.entity';
 
 @Entity()
 export class Post {
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  id!: string;
 
   @Column()
-  title: string;
+  title!: string;
 
   @Column({ unique: true })
-  slug: string;
+  slug!: string;
 
   @Column('text')
-  content: string;
+  content!: string;
 
   @Column()
-  excerpt: string;
+  excerpt!: string;
 
   @Column({ nullable: true })
-  coverImageUrl: string;
+  coverImageUrl!: string;
 
   @Column({ default: false })
-  published: boolean;
+  published!: boolean;
 
   @CreateDateColumn()
-  createdAt: Date;
+  createdAt!: Date;
 
   @UpdateDateColumn()
-  updatedAt: Date;
+  updatedAt!: Date;
 
   // Many to One <- authorId <- FK para User
-  @ManyToOne(() => User)
-  author: User;
+  @ManyToOne(() => User, { onDelete: 'CASCADE' })
+  author!: User;
 }
